@@ -2,13 +2,13 @@ import React from "react";
 
 import Friend from "./Friend";
 
-function FriendsList() {
+function FriendsList({ data }) {
   return (
-    <div>
-      <Friend />
-      <Friend />
-      <Friend />
-    </div>
+    <ul>
+      {data.map((friend) => {
+        return <Friend friend={friend} key={friend.id} />;
+      })}
+    </ul>
   );
 }
 
