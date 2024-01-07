@@ -28,20 +28,15 @@ const initialFriends = [
 
 function App() {
   const [addIsOpen, setAddIsOpen] = useState(false);
-  const [splitIsOpen, setSplitIsOpen] = useState(false);
+  const [selectedFriend, setSelectedFriend] = useState(null);
   const [addFriendName, setAddFriendName] = useState("");
   const [addFriendImage, setAddFriendImage] = useState(
     "https://i.pravatar.cc/48"
   );
-
   const [friendList, setFriendList] = useState(initialFriends);
 
   const handleAddForm = () => {
     setAddIsOpen((c) => !c);
-  };
-
-  const handleSelectForm = () => {
-    setSplitIsOpen((c) => !c);
   };
 
   const onChangeName = (e) => {
@@ -73,10 +68,19 @@ function App() {
     setAddIsOpen(false);
   };
 
+  function handleSelectedFriend(friend) {
+    setSelectedFriend(friend);
+  }
+
   return (
     <div className="app">
       <div className="sidebar">
-        <FriendsList data={friendList} handleForm={handleSelectForm} />
+        <FriendsList
+          data={friendList}
+          onSelection={handleSelectedFriend}
+          selectedFriend={selectedFriend}
+        />
+
         {addIsOpen && (
           <AddFriend
             nameInput={addFriendName}
@@ -86,11 +90,12 @@ function App() {
             onAddSubmit={onAddSubmit}
           />
         )}
-        <Button handleForm={handleAddForm}>
+
+        <Button onClick={handleAddForm}>
           {addIsOpen ? "Close" : "Add a friend"}
         </Button>
       </div>
-      {splitIsOpen && <BillBox />}
+      {selectedFriend && <BillBox selectedFriend={selectedFriend} />}
     </div>
   );
 }
