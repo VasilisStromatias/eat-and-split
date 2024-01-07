@@ -2,7 +2,7 @@ import React from "react";
 
 import Button from "./Button";
 
-function Friend({ friend }) {
+function Friend({ friend, handleForm }) {
   return (
     <li>
       <img src={friend.image} alt={friend.name} />
@@ -18,7 +18,7 @@ function Friend({ friend }) {
         </p>
       )}
       {friend.balance === 0 && <p>You and your {friend.name} are even</p>}
-      <Button>Select</Button>
+      <Button handleForm={handleForm}>Select</Button>
     </li>
   );
 }

@@ -1,8 +1,8 @@
 import React from "react";
 
-function Button({ children, handleAddForm }) {
+function Button({ children, handleForm }) {
   return (
-    <button className="button" onClick={handleAddForm}>
+    <button className="button" onClick={handleForm}>
       {children}
     </button>
   );

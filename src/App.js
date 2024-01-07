@@ -28,6 +28,7 @@ const initialFriends = [
 
 function App() {
   const [addIsOpen, setAddIsOpen] = useState(false);
+  const [splitIsOpen, setSplitIsOpen] = useState(false);
   const [addFriendName, setAddFriendName] = useState("");
   const [addFriendImage, setAddFriendImage] = useState(
     "https://i.pravatar.cc/48"
@@ -37,6 +38,10 @@ function App() {
 
   const handleAddForm = () => {
     setAddIsOpen((c) => !c);
+  };
+
+  const handleSelectForm = () => {
+    setSplitIsOpen((c) => !c);
   };
 
   const onChangeName = (e) => {
@@ -71,7 +76,7 @@ function App() {
   return (
     <div className="app">
       <div className="sidebar">
-        <FriendsList data={friendList} />
+        <FriendsList data={friendList} handleForm={handleSelectForm} />
         {addIsOpen && (
           <AddFriend
             nameInput={addFriendName}
@@ -81,11 +86,11 @@ function App() {
             onAddSubmit={onAddSubmit}
           />
         )}
-        <Button handleAddForm={handleAddForm}>
+        <Button handleForm={handleAddForm}>
           {addIsOpen ? "Close" : "Add a friend"}
         </Button>
       </div>
-      <BillBox />
+      {splitIsOpen && <BillBox />}
     </div>
   );
 }
