@@ -69,7 +69,8 @@ function App() {
   };
 
   function handleSelectedFriend(friend) {
-    setSelectedFriend(friend);
+    setSelectedFriend((cur) => (cur?.id === friend.id ? null : friend));
+    setAddIsOpen(false);
   }
 
   return (
