@@ -73,6 +73,20 @@ function App() {
     setAddIsOpen(false);
   }
 
+  function handleSplitForm(value) {
+    console.log(value);
+
+    setFriendList((friends) =>
+      friends.map((friend) =>
+        friend.id === selectedFriend.id
+          ? { ...friend, balance: friend.balance + value }
+          : friend
+      )
+    );
+
+    setSelectedFriend(null);
+  }
+
   return (
     <div className="app">
       <div className="sidebar">
@@ -96,7 +110,12 @@ function App() {
           {addIsOpen ? "Close" : "Add a friend"}
         </Button>
       </div>
-      {selectedFriend && <BillBox selectedFriend={selectedFriend} />}
+      {selectedFriend && (
+        <BillBox
+          selectedFriend={selectedFriend}
+          onSplitBill={handleSplitForm}
+        />
+      )}
     </div>
   );
 }
